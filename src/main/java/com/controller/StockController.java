@@ -38,32 +38,28 @@ public class StockController {
         return "forward:/databaseApiResponse";
     }
 
-//    @RequestMapping(value = "/readTwNameMapping", method = {RequestMethod.POST, RequestMethod.GET})
-//    public String readTwNameMapping(HttpServletRequest request) {
-//        DatabaseApiResponseBean responseDTO = twStockService.readTwNameMapping();
-//        request.setAttribute("response", responseDTO);
-//        return "forward:/databaseApiResponse";
-//    }
+    @RequestMapping(value = "/usaPriceLog/{action}", method = {RequestMethod.POST, RequestMethod.GET})
+    public String usaPriceLog(@PathVariable("action") String action, HttpServletRequest request) {
+        Object parameter = request.getAttribute("request");
+        DatabaseApiResponseBean responseDTO = null;
+        switch (action) {
+            case "create": {
+                responseDTO = usaStockService.createUsaPriceLog(parameter);
+                break;
+            }
+            case "read": {
+                responseDTO = usaStockService.readUsaPriceLog();
+                break;
+            }
+        }
+        request.setAttribute("response", responseDTO);
+        return "forward:/databaseApiResponse";
+    }
 
     @RequestMapping(value = "/createTwTradeLog", method = {RequestMethod.POST, RequestMethod.GET})
     public String createTwTradeLog(HttpServletRequest request) {
         Object parameter = request.getAttribute("request");
         DatabaseApiResponseBean responseDTO = twStockService.createTwTradeLog(parameter);
-        request.setAttribute("response", responseDTO);
-        return "forward:/databaseApiResponse";
-    }
-
-    @RequestMapping(value = "/createUsaPriceLog", method = {RequestMethod.POST, RequestMethod.GET})
-    public String createUsaPriceLog(HttpServletRequest request) {
-        Object parameter = request.getAttribute("request");
-        DatabaseApiResponseBean responseDTO = usaStockService.createUsaPriceLog(parameter);
-        request.setAttribute("response", responseDTO);
-        return "forward:/databaseApiResponse";
-    }
-
-    @RequestMapping("readUsaPriceLog")
-    public String readUsaPriceLog(HttpServletRequest request) {
-        DatabaseApiResponseBean responseDTO = usaStockService.readUsaPriceLog();
         request.setAttribute("response", responseDTO);
         return "forward:/databaseApiResponse";
     }
