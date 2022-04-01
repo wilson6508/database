@@ -10,7 +10,7 @@ public class EnumTool {
         STOCK_CREATE_USA_PRICE_LOG("stock_create_usa_price_log", "/stock/usaPriceLog/create", true),
         STOCK_READ_USA_PRICE_LOG("stock_read_usa_price_log", "/stock/usaPriceLog/read", true),
 
-        STOCK_CREATE_USA_TRADE_LOG("stock_create_usa_trade_log", "/stock/usaTradeLog/create", false),
+        STOCK_CREATE_USA_TRADE_LOG("stock_create_usa_trade_log", "/stock/usaTradeLog/create", true),
         STOCK_READ_USA_TRADE_LOG("stock_read_usa_trade_log", "/stock/usaTradeLog/read", false),
 
         STOCK_CREATE_TW_TRADE_LOG("stock_create_tw_trade_log", "/stock/twTradeLog/create", false),

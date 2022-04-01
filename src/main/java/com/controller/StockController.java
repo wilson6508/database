@@ -20,17 +20,13 @@ public class StockController {
     @Autowired
     private UsaStockService usaStockService;
 
-    @RequestMapping(value = "/twNameMapping/{action}", method = {RequestMethod.POST, RequestMethod.GET})
-    public String twNameMapping(@PathVariable("action") String action, HttpServletRequest request) {
+    @RequestMapping(value = "/usaTradeLog/{action}", method = {RequestMethod.POST, RequestMethod.GET})
+    public String usaTradeLog(@PathVariable("action") String action, HttpServletRequest request) {
         Object parameter = request.getAttribute("request");
         DatabaseApiResponseBean responseDTO = null;
         switch (action) {
-            case "read": {
-                responseDTO = twStockService.readTwNameMapping();
-                break;
-            }
-            case "update": {
-                responseDTO = twStockService.updateTwNameMapping(parameter);
+            case "create": {
+                responseDTO = usaStockService.createUsaTradeLog(parameter);
                 break;
             }
         }
@@ -56,18 +52,34 @@ public class StockController {
         return "forward:/databaseApiResponse";
     }
 
-    @RequestMapping(value = "/createTwTradeLog", method = {RequestMethod.POST, RequestMethod.GET})
-    public String createTwTradeLog(HttpServletRequest request) {
+    @RequestMapping(value = "/twTradeLog/{action}", method = {RequestMethod.POST, RequestMethod.GET})
+    public String twTradeLog(@PathVariable("action") String action, HttpServletRequest request) {
         Object parameter = request.getAttribute("request");
-        DatabaseApiResponseBean responseDTO = twStockService.createTwTradeLog(parameter);
+        DatabaseApiResponseBean responseDTO = null;
+        switch (action) {
+            case "create": {
+                responseDTO = twStockService.createTwTradeLog(parameter);
+                break;
+            }
+        }
         request.setAttribute("response", responseDTO);
         return "forward:/databaseApiResponse";
     }
 
-    @RequestMapping(value = "/createUsaTradeLog", method = {RequestMethod.POST, RequestMethod.GET})
-    public String createUsaTradeLog(HttpServletRequest request) {
+    @RequestMapping(value = "/twNameMapping/{action}", method = {RequestMethod.POST, RequestMethod.GET})
+    public String twNameMapping(@PathVariable("action") String action, HttpServletRequest request) {
         Object parameter = request.getAttribute("request");
-        DatabaseApiResponseBean responseDTO = usaStockService.createUsaTradeLog(parameter);
+        DatabaseApiResponseBean responseDTO = null;
+        switch (action) {
+            case "read": {
+                responseDTO = twStockService.readTwNameMapping();
+                break;
+            }
+            case "update": {
+                responseDTO = twStockService.updateTwNameMapping(parameter);
+                break;
+            }
+        }
         request.setAttribute("response", responseDTO);
         return "forward:/databaseApiResponse";
     }
