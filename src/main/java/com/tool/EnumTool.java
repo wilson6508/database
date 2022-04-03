@@ -17,7 +17,7 @@ public class EnumTool {
         STOCK_READ_TW_TRADE_LOG("stock_read_tw_trade_log", "/stock/twTradeLog/create", false),
 
         STOCK_READ_TW_NAME_MAPPING("stock_read_tw_name_mapping", "/stock/twNameMapping/read", false),
-        STOCK_UPDATE_TW_NAME_MAPPING("stock_update_tw_name_mapping", "/stock/twNameMapping/update", false),
+        STOCK_UPDATE_TW_NAME_MAPPING("stock_update_tw_name_mapping", "/stock/twNameMapping/update", true),
 
         ;
 
