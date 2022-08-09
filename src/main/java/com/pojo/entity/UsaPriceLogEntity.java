@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "usa_price_log", schema = "stock_dev")
+@Table(name = "usa_price_log")
 public class UsaPriceLogEntity {
     private int id;
     private String date;
