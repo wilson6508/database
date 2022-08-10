@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -40,10 +41,21 @@ public class UsaStockService {
         return responseBean;
     }
 
-    public DatabaseApiResponseBean readUsaPriceLog() {
+    public DatabaseApiResponseBean readUsaPriceLog(Object parameter) {
         DatabaseApiResponseBean responseBean = objectTool.getErrorRep();
+        String stockId = parameter.toString().split(";")[0];
+        String date = parameter.toString().split(";")[1];
         try {
-            List<UsaPriceLogEntity> list = usaPriceLogRepository.findAll();
+            List<UsaPriceLogEntity> list;
+            if (stockId.equals("all") && date.equals("all")) {
+                list = usaPriceLogRepository.findAll();
+            } else if (stockId.equals("all")) {
+                list = usaPriceLogRepository.findByDateEndsWith(date);
+            } else if (date.equals("all")) {
+                list = usaPriceLogRepository.findByStockId(stockId);
+            } else {
+                list= usaPriceLogRepository.findByStockIdAndDateEndsWith(stockId, date);
+            }
             responseBean = objectTool.getSuccessRep();
             responseBean.setResult(list);
         } catch (Exception e) {
@@ -60,6 +72,24 @@ public class UsaStockService {
             usaTradeLogRepository.saveAll(list);
             responseBean = objectTool.getSuccessRep();
             responseBean.setResult("success");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return responseBean;
+    }
+
+    public DatabaseApiResponseBean readUsaTradeLog(Object parameter) {
+        DatabaseApiResponseBean responseBean = objectTool.getErrorRep();
+        String stockId = parameter.toString();
+        try {
+            List<UsaTradeLogEntity> list;
+            if (stockId.equals("")) {
+                list = usaTradeLogRepository.findAll();
+            } else {
+                list = usaTradeLogRepository.findByStockId(stockId);
+            }
+            responseBean = objectTool.getSuccessRep();
+            responseBean.setResult(list);
         } catch (Exception e) {
             e.printStackTrace();
         }

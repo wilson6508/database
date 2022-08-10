@@ -1,12 +1,15 @@
 package com.tool;
 
+import lombok.Getter;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EnumTool {
 
+    @Getter
+    @AllArgsConstructor
     public enum ModuleType {
-
         STOCK_CREATE_USA_PRICE_LOG("stock_create_usa_price_log", "/stock/usaPriceLog/create", true),
         STOCK_READ_USA_PRICE_LOG("stock_read_usa_price_log", "/stock/usaPriceLog/read", true),
 
@@ -18,42 +21,10 @@ public class EnumTool {
 
         STOCK_READ_TW_NAME_MAPPING("stock_read_tw_name_mapping", "/stock/twNameMapping/read", false),
         STOCK_UPDATE_TW_NAME_MAPPING("stock_update_tw_name_mapping", "/stock/twNameMapping/update", true),
-
         ;
-
         private String moduleName;
         private String modulePath;
         private boolean needLog;
-
-        ModuleType(String moduleName, String modulePath, boolean needLog) {
-            this.moduleName = moduleName;
-            this.modulePath = modulePath;
-            this.needLog = needLog;
-        }
-
-        public String getModuleName() {
-            return moduleName;
-        }
-
-        public void setModuleName(String moduleName) {
-            this.moduleName = moduleName;
-        }
-
-        public String getModulePath() {
-            return modulePath;
-        }
-
-        public void setModulePath(String modulePath) {
-            this.modulePath = modulePath;
-        }
-
-        public boolean isNeedLog() {
-            return needLog;
-        }
-
-        public void setNeedLog(boolean needLog) {
-            this.needLog = needLog;
-        }
     }
 
     public ModuleType findModuleType(String str) {

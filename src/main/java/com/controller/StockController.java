@@ -16,23 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 public class StockController {
 
     @Autowired
-    private TwStockService twStockService;
-    @Autowired
     private UsaStockService usaStockService;
-
-    @RequestMapping(value = "/usaTradeLog/{action}", method = {RequestMethod.POST, RequestMethod.GET})
-    public String usaTradeLog(@PathVariable("action") String action, HttpServletRequest request) {
-        Object parameter = request.getAttribute("request");
-        DatabaseApiResponseBean responseDTO = null;
-        switch (action) {
-            case "create": {
-                responseDTO = usaStockService.createUsaTradeLog(parameter);
-                break;
-            }
-        }
-        request.setAttribute("response", responseDTO);
-        return "forward:/databaseApiResponse";
-    }
+    @Autowired
+    private TwStockService twStockService;
 
     @RequestMapping(value = "/usaPriceLog/{action}", method = {RequestMethod.POST, RequestMethod.GET})
     public String usaPriceLog(@PathVariable("action") String action, HttpServletRequest request) {
@@ -44,7 +30,25 @@ public class StockController {
                 break;
             }
             case "read": {
-                responseDTO = usaStockService.readUsaPriceLog();
+                responseDTO = usaStockService.readUsaPriceLog(parameter);
+                break;
+            }
+        }
+        request.setAttribute("response", responseDTO);
+        return "forward:/databaseApiResponse";
+    }
+
+    @RequestMapping(value = "/usaTradeLog/{action}", method = {RequestMethod.POST, RequestMethod.GET})
+    public String usaTradeLog(@PathVariable("action") String action, HttpServletRequest request) {
+        Object parameter = request.getAttribute("request");
+        DatabaseApiResponseBean responseDTO = null;
+        switch (action) {
+            case "create": {
+                responseDTO = usaStockService.createUsaTradeLog(parameter);
+                break;
+            }
+            case "read": {
+                responseDTO = usaStockService.readUsaTradeLog(parameter);
                 break;
             }
         }
