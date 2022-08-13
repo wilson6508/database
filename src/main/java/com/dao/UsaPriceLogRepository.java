@@ -8,5 +8,6 @@ import java.util.List;
 public interface UsaPriceLogRepository extends JpaRepository<UsaPriceLogEntity, Integer> {
     List<UsaPriceLogEntity> findByStockId(String stockId);
     List<UsaPriceLogEntity> findByDateEndsWith(String date);
-    List<UsaPriceLogEntity> findByStockIdAndDateEndsWith(String stockId, String date);
+    List<UsaPriceLogEntity> findByStockIdAndDateStartsWith(String stockId, String date);
+//    List<UsaPriceLogEntity> findByStockIdAndDateEndsWith(String stockId, String date);
 }

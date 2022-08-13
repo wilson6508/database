@@ -1,7 +1,9 @@
-package com.service.stock;
+package com.service.test;
 
 import com.dao.UsaPriceLogRepository;
 import com.google.gson.Gson;
+import com.mapper.Count;
+import com.mapper.UsaPriceLogMapper;
 import com.pojo.entity.UsaPriceLogEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TestService {
@@ -18,6 +21,23 @@ public class TestService {
 
     @Autowired
     UsaPriceLogRepository usaPriceLogRepository;
+    @Autowired
+    UsaPriceLogMapper usaPriceLogMapper;
+
+    public void demo1() {
+        UsaPriceLogEntity entity = usaPriceLogMapper.getEntityById(1);
+        System.out.println(gson.toJson(entity));
+    }
+
+    public void demo2() {
+        List<UsaPriceLogEntity> list = usaPriceLogMapper.getEntityListByStockId("SPY");
+        System.out.println(list.size());
+    }
+
+    public void demo3() {
+        List<Count> countList = usaPriceLogMapper.getCountList();
+        System.out.println(gson.toJson(countList));
+    }
 
     public void test() {
 

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -54,7 +53,7 @@ public class UsaStockService {
             } else if (date.equals("all")) {
                 list = usaPriceLogRepository.findByStockId(stockId);
             } else {
-                list= usaPriceLogRepository.findByStockIdAndDateEndsWith(stockId, date);
+                list= usaPriceLogRepository.findByStockIdAndDateStartsWith(stockId, date);
             }
             responseBean = objectTool.getSuccessRep();
             responseBean.setResult(list);
